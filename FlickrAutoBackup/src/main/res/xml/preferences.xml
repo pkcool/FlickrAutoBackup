@@ -1,0 +1,59 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceScreen android:key="premium" />
+    <PreferenceScreen android:key="login" />
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="autoupload"
+        android:summaryOff="Photos are manually uploaded"
+        android:summaryOn="Photos are automatically uploaded"
+        android:title="Photo Instant Upload" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="autouploadvideos"
+        android:summaryOff="Videos are manually uploaded"
+        android:summaryOn="Videos are automatically uploaded"
+        android:title="Video Instant Upload" />
+
+    <ListPreference
+        android:dialogTitle="Instant Upload Photoset"
+        android:entries="@array/autoupload_photoset_entries"
+        android:entryValues="@array/autoupload_photoset_values"
+        android:key="autoupload_photoset"
+        android:title="Instant Upload Photoset" />
+    <ListPreference
+        android:defaultValue="wifior3G"
+        android:dialogTitle="When to upload"
+        android:entries="@array/network_entries"
+        android:entryValues="@array/network_values"
+        android:key="upload_network"
+        android:title="When to upload" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="charging_only"
+        android:title="Only when charging" />
+
+    <ListPreference
+        android:dialogTitle="Upload privacy"
+        android:key="upload_privacy"
+        android:title="Upload privacy" />
+
+    <PreferenceScreen
+        android:key="notifications"
+        android:title="Notifications" />
+    <PreferenceScreen
+        android:key="rate"
+        android:summary="If you like this app, please rate it ★★★★★ on Google Play"
+        android:title="Rate the app" />
+    <PreferenceScreen
+        android:key="feedback"
+        android:summary="Something is not right? Need some help? Ideas for improvements?"
+        android:title="Feedback / Help" />
+    <PreferenceScreen
+        android:key="pictarine"
+        android:summary="Browse your photos and friends photos from Flickr, Facebook, Instagram, Twitter, Tumblr and more"
+        android:title="Pictarine, the best photo app" />
+
+</PreferenceScreen>
