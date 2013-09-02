@@ -2,11 +2,13 @@ buildscript {
     repositories {
         mavenCentral()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:0.5.+'
     }
 }
 apply plugin: 'android'
+
 
 repositories {
     mavenCentral()
@@ -21,6 +23,19 @@ android {
         targetSdkVersion 16
     }
 }
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+    }
+}
+
+clean {
+    delete 'gen'
+}
+
 
 dependencies {
 

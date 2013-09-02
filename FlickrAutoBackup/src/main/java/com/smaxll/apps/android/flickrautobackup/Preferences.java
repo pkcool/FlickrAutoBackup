@@ -84,7 +84,9 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 								}
 							}).setNegativeButton("Cancel", null).show();
 				} else {
-//					WebAuth_.intent(Preferences.this).start();
+//					WebAuth.intent(Preferences.this).start();
+                    Intent myIntent = new Intent(Preferences.this, WebAuth.class);
+                    Preferences.this.startActivity(myIntent);
 				}
 				return false;
 			}
