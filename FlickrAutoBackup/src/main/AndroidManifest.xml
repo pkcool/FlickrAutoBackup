@@ -26,6 +26,24 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <service android:name=".UploadService" />
+
+        <receiver android:name=".MyBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.smaxll.intent.CANCEL_UPLOAD" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.smaxll.intent.SHARE_PHOTO" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name="com.smaxll.apps.android.flickrautobackup.MainActivity"
             android:label="@string/app_name" >
