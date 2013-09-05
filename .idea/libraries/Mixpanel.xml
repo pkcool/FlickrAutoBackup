@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Mixpanel">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/FlickrAutoBackup/libs/Mixpanel.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FlickrAutoBackup/libs/Mixpanel.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

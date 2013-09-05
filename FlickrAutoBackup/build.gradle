@@ -48,4 +48,5 @@ dependencies {
     compile 'com.googlecode.flickrj-android:flickrj-android:2.0.7'
     compile 'com.google.collections:google-collections:1.0'
     compile 'com.github.chrisbanes.bitmapcache:library:2.3'
+    compile files('libs/MixpanelAPI.jar')
 }

@@ -4,8 +4,6 @@
       <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.google.collections/google-collections/1.0/jar/9ffe71ac6dcab6bc03ea13f5c2e7b2804e69b357/google-collections-1.0.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.ideaLibSources/google-collections-1.0-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

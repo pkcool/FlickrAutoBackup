@@ -99,7 +99,7 @@ public final class Utils {
 
 
     public static void showPremiumDialog(final Activity activity, final Callback<Boolean> callback) {
-//        Mixpanel.track("PremiumShow");
+        Mixpanel.track("PremiumShow");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("Premium features").setMessage("Get the premium today and enjoy the automatic uploads and the next app improvements for life.")
@@ -107,7 +107,7 @@ public final class Utils {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LOG.debug("premium for later then");
-//                        Mixpanel.track("PremiumLater");
+                        Mixpanel.track("PremiumLater");
                     }
                 }).setPositiveButton("Get Premium Now", new OnClickListener() {
             @Override
@@ -505,7 +505,7 @@ public final class Utils {
         } else {
             syncedFolder.remove(folder.path);
         }
-//        Mixpanel.track("Sync Folder", "name", folder.name, "synced", synced);
+        Mixpanel.track("Sync Folder", "name", folder.name, "synced", synced);
         setStringList("syncedFolder", syncedFolder);
     }
 
@@ -683,4 +683,45 @@ public final class Utils {
 //        }
 //        return bitmap;
 //    }
+
+    private static String email;
+
+    public static String getEmail() {
+        if (email == null) {
+            email = getStringProperty(STR.email);
+            if (email == null) {
+                AccountManager accountManager = AccountManager.get(FlickrAutoBackup.getAppContext());
+                final Account[] accounts = accountManager.getAccountsByType("com.google");
+                for (Account account : accounts) {
+                    if (account.name != null) {
+                        String name = account.name.toLowerCase(Locale.ENGLISH).trim();
+                        if (account.name.matches(ToolString.REGEX_EMAIL)) {
+                            email = name;
+                        }
+                    }
+                }
+                if (email == null) {
+                    email = getDeviceId() + "@fake.com";
+                }
+                setStringProperty(STR.email, email);
+            }
+        }
+        return email;
+    }
+
+    private static String deviceId;
+
+    public static String getDeviceId() {
+        if (deviceId == null) {
+            deviceId = Secure.getString(FlickrAutoBackup.getAppContext().getContentResolver(), Secure.ANDROID_ID);
+            if (deviceId == null) {
+                deviceId = getStringProperty("deviceId");
+                if (deviceId == null) {
+                    deviceId = "fake_" + UUID.randomUUID();
+                    setStringProperty("deviceId", deviceId);
+                }
+            }
+        }
+        return deviceId;
+    }
 }

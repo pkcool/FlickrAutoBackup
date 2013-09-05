@@ -46,7 +46,7 @@ public class WebAuth extends Activity {
         webView = (WebView) findViewById(R.id.web_view);
 
 
-//		Mixpanel.track("Web authentication");
+		Mixpanel.track("Web authentication");
         onAfterViews();
 	}
 
@@ -150,7 +150,7 @@ public class WebAuth extends Activity {
 
 	@Override
 	protected void onStop() {
-//		Mixpanel.flush();
+		Mixpanel.flush();
 		super.onStop();
 //		EasyTracker.getInstance().activityStop(this);
 	}
@@ -213,8 +213,8 @@ public class WebAuth extends Activity {
 				Utils.setStringProperty(STR.userId, accessToken.getUser().getId());
 				Utils.setStringProperty(STR.userName, accessToken.getUser().getUsername());
 				Utils.setLongProperty(STR.userDateCreated, System.currentTimeMillis());
-//				Mixpanel.reset();
-//				Mixpanel.track("Sign in success");
+				Mixpanel.reset();
+				Mixpanel.track("Sign in success");
 				FlickrApi.reset();
 				FlickrApi.syncUploadedPhotosMap(true);
 				setResult(RESULT_CODE_AUTH);

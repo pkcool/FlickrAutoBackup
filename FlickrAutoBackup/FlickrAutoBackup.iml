@@ -82,6 +82,7 @@
     <orderEntry type="library" exported="" name="androidannotations-api-2.7.1" level="project" />
     <orderEntry type="library" exported="" name="codemodel-2.4.1" level="project" />
     <orderEntry type="library" exported="" name="androidannotations-2.7.1" level="project" />
+    <orderEntry type="library" exported="" name="MixpanelAPI" level="project" />
   </component>
 </module>
 

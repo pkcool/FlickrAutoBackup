@@ -354,8 +354,8 @@ public class UploadService extends Service {
                                     } else {
                                         FlickrApi.ensureOrdered(Utils.getInstantAlbumId());
                                     }
-//                                    Mixpanel.increment("photo_uploaded", uploaded.size());
-//                                    Mixpanel.flush();
+                                    Mixpanel.increment("photo_uploaded", uploaded.size());
+                                    Mixpanel.flush();
                                 }
                                 failed.remove(mediaCurrentlyUploading);
                                 failedCount.remove(mediaCurrentlyUploading.id);
