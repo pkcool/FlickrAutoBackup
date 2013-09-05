@@ -33,6 +33,7 @@ import android.view.WindowManager;
 
 
 import com.google.common.base.Joiner;
+import com.googlecode.androidannotations.api.BackgroundExecutor;
 import com.googlecode.androidannotations.api.rest.MediaType;
 
 import org.apache.http.HttpRequest;
@@ -724,4 +725,108 @@ public final class Utils {
         }
         return deviceId;
     }
+
+    static boolean showingEmailActivity = false;
+
+    public static void showEmailActivity(final Activity activity, final String subject, final String message, final boolean attachLogs) {
+        if (!showingEmailActivity) {
+            showingEmailActivity = true;
+            BackgroundExecutor.execute(new Runnable() {
+
+                @Override
+                public void run() {
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/email");
+                        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"smaxllimit@gmail.com"});
+                        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                        intent.putExtra(Intent.EXTRA_TEXT, message);
+
+                        if (attachLogs) {
+                            File log = Utils.getLogFile();
+                            if (log.exists()) {
+                                File publicDownloadDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                                File publicLog = new File(publicDownloadDirectory, "flickruploader_log.txt");
+                                Utils.copyFile(log, publicLog);
+                                try {
+                                    BufferedWriter bW = new BufferedWriter(new FileWriter(publicLog, true));
+                                    bW.newLine();
+                                    bW.write("app version : " + Config.FULL_VERSION_NAME);
+                                    bW.newLine();
+                                    bW.write("device id : " + getDeviceId());
+                                    bW.newLine();
+                                    bW.write("date install : " + FlickrAutoBackup.getAppContext().getPackageManager().getPackageInfo(FlickrAutoBackup.getAppContext().getPackageName(), 0).firstInstallTime);
+                                    bW.newLine();
+                                    bW.flush();
+                                    bW.close();
+                                } catch (Throwable e) {
+                                    LOG.error(e.getMessage(), e);
+                                }
+                                Uri uri = Uri.fromFile(publicLog);
+                                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                            } else {
+                                LOG.warn(log + " does not exist");
+                            }
+                        }
+                        final List<ResolveInfo> resInfoList = activity.getPackageManager().queryIntentActivities(intent, 0);
+
+                        ResolveInfo gmailResolveInfo = null;
+                        for (ResolveInfo resolveInfo : resInfoList) {
+                            if ("com.google.android.gm".equals(resolveInfo.activityInfo.packageName)) {
+                                gmailResolveInfo = resolveInfo;
+                                break;
+                            }
+                        }
+
+                        if (gmailResolveInfo != null) {
+                            intent.setClassName(gmailResolveInfo.activityInfo.packageName, gmailResolveInfo.activityInfo.name);
+                            activity.startActivity(intent);
+                        } else {
+                            activity.startActivity(Intent.createChooser(intent, "Send Feedback:"));
+                        }
+                    } catch (Throwable e) {
+                        LOG.error(e.getMessage(), e);
+                    } finally {
+                        showingEmailActivity = false;
+                    }
+                }
+            });
+        }
+    }
+
+    // copy a file from srcFile to destFile, return true if succeed, return
+    // false if fail
+    public static boolean copyFile(File srcFile, File destFile) {
+        boolean result = false;
+        try {
+            InputStream in = new FileInputStream(srcFile);
+            try {
+                result = copyToFile(in, destFile);
+            } finally {
+                in.close();
+            }
+        } catch (IOException e) {
+            result = false;
+        }
+        return result;
+    }
+
+    private static boolean copyToFile(InputStream inputStream, File destFile) {
+        try {
+            OutputStream out = new FileOutputStream(destFile);
+            try {
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) >= 0) {
+                    out.write(buffer, 0, bytesRead);
+                }
+            } finally {
+                out.close();
+            }
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
 }

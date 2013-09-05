@@ -16,9 +16,6 @@ public class STR {
 	public static final String uploadedFolders = "uploadedFolders";
 	public static final String instantCustomAlbumId = "instantCustomAlbumId";
 	public static final String instantCustomAlbumTitle = "instantCustomAlbumTitle";
-	public static final String premium = "premium";
-	public static final String couponInfo = "couponInfo";
-	public static final String lastPremiumCheck = "lastPremiumCheck";
 	public static final String manuallyPaused = "manuallyPaused";
 	public static final String queueIds = "queueIds";
 	public static final String failedCount = "failedCount";

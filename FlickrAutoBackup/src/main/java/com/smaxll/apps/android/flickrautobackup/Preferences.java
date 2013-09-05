@@ -56,6 +56,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 		// add preferences from xml
 		addPreferencesFromResource(R.xml.preferences);
 		sp.registerOnSharedPreferenceChangeListener(this);
+
 		findPreference("login").setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
@@ -64,7 +65,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 							.setPositiveButton("Yes", new OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-//									Mixpanel.track("Sign out");
+									Mixpanel.track("Sign out");
 									Editor editor = sp.edit();
 									editor.remove(STR.userId);
 									editor.remove(STR.accessToken);
@@ -91,6 +92,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 				return false;
 			}
 		});
+
 		ListPreference privacyPreference = (ListPreference) findPreference(UPLOAD_PRIVACY);
 		PRIVACY[] privacies = FlickrApi.PRIVACY.values();
 		int length = privacies.length;
@@ -107,7 +109,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				Preferences.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.rafali.flickruploader")));
-//				Mixpanel.track("Rate");
+				Mixpanel.track("Rate");
 				Utils.setBooleanProperty(STR.hasRated, true);
 				return false;
 			}
@@ -124,7 +126,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 		findPreference("pictarine").setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-//				Mixpanel.track("Pictarine");
+				Mixpanel.track("Pictarine");
 				Preferences.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.pictarine.android")));
 				return false;
 			}
@@ -133,8 +135,8 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 		findPreference("feedback").setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-//				Mixpanel.track("Feedback");
-//				Utils.showEmailActivity(Preferences.this, "Feedback on Flickr Instant Upload", "Here are some feedback to improve this app:", true);
+				Mixpanel.track("Feedback");
+				Utils.showEmailActivity(Preferences.this, "Feedback on Flickr Instant Upload", "Here are some feedback to improve this app:", true);
 				return false;
 			}
 
@@ -211,7 +213,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sp, String key) {
-//		Mixpanel.track("Preference Change", key, sp.getAll().get(key));
+		Mixpanel.track("Preference Change", key, sp.getAll().get(key));
 		render();
 	}
 
@@ -245,49 +247,8 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 			login.setTitle("Sign out");
 			login.setSummary(Utils.getStringProperty(STR.userName) + " is currently logged in");
 		}
-		Preference premium = findPreference(STR.premium);
-		if (false) {
-//            if (Utils.isPremium()) {
-			premium.setTitle("You are a Premium user");
-			premium.setSummary("Thank you!");
-		} else {
-			if (true) {
-//                if (Utils.isTrial()) {
-				premium.setTitle("Premium Trial");
-//				premium.setSummary("It ends on " + SimpleDateFormat.getDateInstance().format(new Date(Utils.trialUntil())));
-			} else {
-				premium.setTitle("Premium Trial Ended");
-				premium.setSummary("Click here to go Premium");
-				((CheckBoxPreference) findPreference(AUTOUPLOAD)).setChecked(false);
-				((CheckBoxPreference) findPreference(AUTOUPLOAD_VIDEOS)).setChecked(false);
-				OnPreferenceClickListener onPreferenceClickListener = new OnPreferenceClickListener() {
-					@Override
-					public boolean onPreferenceClick(Preference preference) {
-						Utils.showPremiumDialog(Preferences.this, new Utils.Callback<Boolean>() {
-							@Override
-							public void onResult(Boolean result) {
-								render();
-							}
-						});
-						return false;
-					}
-				};
-				findPreference(AUTOUPLOAD).setOnPreferenceClickListener(onPreferenceClickListener);
-				findPreference(AUTOUPLOAD_VIDEOS).setOnPreferenceClickListener(onPreferenceClickListener);
-			}
-			premium.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-				@Override
-				public boolean onPreferenceClick(Preference preference) {
-					Utils.showPremiumDialog(Preferences.this, new Utils.Callback<Boolean>() {
-						@Override
-						public void onResult(Boolean result) {
-							render();
-						}
-					});
-					return false;
-				}
-			});
-		}
+
+
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
