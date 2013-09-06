@@ -2,6 +2,7 @@ package com.smaxll.apps.android.flickrautobackup;
 
 import android.database.ContentObserver;
 import android.os.Handler;
+import android.util.Log;
 
 import org.slf4j.LoggerFactory;
 
@@ -22,19 +23,24 @@ public class ImageTableObserver extends ContentObserver {
 		try {
 			if (!Utils.getBooleanProperty(Preferences.AUTOUPLOAD, true) && !Utils.getBooleanProperty(Preferences.AUTOUPLOAD_VIDEOS, true)) {
 				LOG.debug("autoupload disabled");
-				return;
+                Log.d("Log", "autoupload disabled");
+                return;
 			}
 
 			if (!FlickrApi.isAuthentified()) {
 				LOG.debug("Flickr not authentified yet");
+                Log.d("Log", "Flickr not authentified yet");
 				return;
 			}
 
+            Log.d("stargin loading media", "loading media");
 			List<Media> media = Utils.loadImages(null, 10);
 			if (media == null || media.isEmpty()) {
 				LOG.debug("no media found");
+                Log.d("no media", "no media found");
 				return;
 			}
+            Log.d(".", "media loaded");
 
 			List<Media> not_uploaded = new ArrayList<Media>();
 			for (Media image : media.subList(0, Math.min(10, media.size()))) {

@@ -28,6 +28,7 @@ sourceSets {
     main {
         java {
             srcDir 'src'
+            asserts.srcDirs = ['assets']
         }
     }
 }
@@ -38,10 +39,6 @@ clean {
 
 
 dependencies {
-
-    compile 'org.slf4j:slf4j-api:1.7.5'
-    compile 'com.github.tony19:logback-android-classic:1.0.10-2'
-    compile 'com.github.tony19:logback-android-core:1.0.10-2'
     compile 'com.googlecode.androidannotations:androidannotations:2.7.1'
     compile 'com.googlecode.androidannotations:androidannotations-api:2.7.1'
     compile 'ch.acra:acra:4.5.0'
@@ -49,4 +46,9 @@ dependencies {
     compile 'com.google.collections:google-collections:1.0'
     compile 'com.github.chrisbanes.bitmapcache:library:2.3'
     compile files('libs/MixpanelAPI.jar')
+    compile 'org.slf4j:slf4j-api:1.7.5'
+    compile 'com.github.tony19:logback-android-classic:1.0.10-2'
+    compile 'com.github.tony19:logback-android-core:1.0.10-2'
+//    compile files('libs/slf4j-api-1.7.5.jar')
+//    compile files('libs/logback-android-1.0.10-2.jar')
 }

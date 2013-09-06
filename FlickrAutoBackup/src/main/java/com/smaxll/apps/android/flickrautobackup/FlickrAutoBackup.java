@@ -9,8 +9,6 @@ import org.acra.ACRA;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.util.Date;
-import java.util.Locale;
 
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.android.LogcatAppender;
@@ -41,7 +39,7 @@ public class FlickrAutoBackup extends Application {
                     long versionCode = Utils.getLongProperty(STR.versionCode);
                     if (Config.VERSION != versionCode) {
                         if (versionCode == 0) {
-//                            Mixpanel.track("First install");
+                            Mixpanel.track("First install");
                         }
 //                        Utils.saveAndroidDevice();
                         Utils.setLongProperty(STR.versionCode, (long) Config.VERSION);
@@ -61,7 +59,7 @@ public class FlickrAutoBackup extends Application {
         try {
             File logFile = Utils.getLogFile();
             ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-            RollingFileAppender<ILoggingEvent> appender = (RollingFileAppender<ILoggingEvent>) root.getAppender("lfile");
+            RollingFileAppender<ILoggingEvent> appender = (RollingFileAppender<ILoggingEvent>) root.getAppender("file");
             appender.setFile(logFile.getAbsolutePath());
             @SuppressWarnings("unchecked")
             TimeBasedRollingPolicy<ILoggingEvent> rollingPolicy = (TimeBasedRollingPolicy<ILoggingEvent>) appender.getRollingPolicy();
