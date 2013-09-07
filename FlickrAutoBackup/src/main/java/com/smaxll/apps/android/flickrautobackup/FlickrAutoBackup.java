@@ -34,6 +34,8 @@ public class FlickrAutoBackup extends Application {
             public void run() {
                 try {
                     initLogs();
+
+                    initLoggers();
                     ACRA.init(FlickrAutoBackup.this);
                     ACRA.getConfig().setApplicationLogFile(Utils.getLogFile().getAbsolutePath());
                     long versionCode = Utils.getLongProperty(STR.versionCode);
@@ -74,6 +76,15 @@ public class FlickrAutoBackup extends Application {
         } catch (Throwable e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Init the loggers that have been initialized before the logger attached.
+     */
+    private static synchronized void initLoggers(){
+//        MyBroadcastReceiver.LOG = LoggerFactory.getLogger(MyBroadcastReceiver.class);
+//        UploadService.LOG = LoggerFactory.getLogger(UploadService.class);
+//        MyBroadcastReceiver.isLoggerInitialized = false;
     }
 
     public static void deleteOldLogs() {

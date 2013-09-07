@@ -1,64 +1,31 @@
 package com.smaxll.apps.android.flickrautobackup;
 
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.BatteryManager;
 import android.os.IBinder;
 import android.provider.MediaStore;
 
 import com.googlecode.androidannotations.api.BackgroundExecutor;
-
-import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.slf4j.LoggerFactory;
-
-import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.BatteryManager;
-import android.os.IBinder;
-import android.provider.MediaStore.Images;
-import android.provider.MediaStore.Video;
-
-import com.googlecode.androidannotations.api.BackgroundExecutor;
 import com.smaxll.apps.android.flickrautobackup.Utils.CAN_UPLOAD;
+
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class UploadService extends Service {
 
-    static final org.slf4j.Logger LOG = LoggerFactory.getLogger(UploadService.class);
+    static org.slf4j.Logger LOG = LoggerFactory.getLogger(UploadService.class);
 
     private static final Set<UploadProgressListener> uploadProgressListeners = new HashSet<UploadProgressListener>();
 
@@ -121,7 +88,7 @@ public class UploadService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        LOG.debug("Service created ...");
+        LOG.debug("Service starting ...");
         running = true;
         try {
             List<Media> images = Utils.getImages(STR.queueIds);
@@ -162,23 +129,25 @@ public class UploadService extends Service {
         getContentResolver().registerContentObserver(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, true, observer);
         getContentResolver().registerContentObserver(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, true, observer);
 
+        LOG.debug("Media Observer...................", "registered");
+
         if (thread == null || !thread.isAlive()) {
             thread = new Thread(new UploadRunnable());
             thread.start();
         }
-        BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-                boolean charging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
-                Utils.setCharging(charging);
-                // LOG.debug("charging : " + charging + ", status : " + status);
-                if (charging)
-                    wake();
-            }
-        };
-        IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        registerReceiver(batteryReceiver, filter);
+//        BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+//                boolean charging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+//                Utils.setCharging(charging);
+//                LOG.debug("charging : " + charging + ", status : " + status);
+//                if (charging)
+//                    wake();
+//            }
+//        };
+//        IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+//        registerReceiver(batteryReceiver, filter);
     }
 
     @Override

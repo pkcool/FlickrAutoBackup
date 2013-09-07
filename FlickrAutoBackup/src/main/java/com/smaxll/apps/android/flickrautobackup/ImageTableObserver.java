@@ -20,27 +20,26 @@ public class ImageTableObserver extends ContentObserver {
 
 	@Override
 	public void onChange(boolean change) {
+
+        LOG.info("NEW images detected");
 		try {
 			if (!Utils.getBooleanProperty(Preferences.AUTOUPLOAD, true) && !Utils.getBooleanProperty(Preferences.AUTOUPLOAD_VIDEOS, true)) {
 				LOG.debug("autoupload disabled");
-                Log.d("Log", "autoupload disabled");
                 return;
 			}
 
 			if (!FlickrApi.isAuthentified()) {
 				LOG.debug("Flickr not authentified yet");
-                Log.d("Log", "Flickr not authentified yet");
 				return;
 			}
 
-            Log.d("stargin loading media", "loading media");
 			List<Media> media = Utils.loadImages(null, 10);
 			if (media == null || media.isEmpty()) {
 				LOG.debug("no media found");
                 Log.d("no media", "no media found");
 				return;
 			}
-            Log.d(".", "media loaded");
+
 
 			List<Media> not_uploaded = new ArrayList<Media>();
 			for (Media image : media.subList(0, Math.min(10, media.size()))) {
@@ -78,4 +77,5 @@ public class ImageTableObserver extends ContentObserver {
 			LOG.error(e.getMessage(), e);
 		}
 	}
+
 }

@@ -1,11 +1,12 @@
 package com.smaxll.apps.android.flickrautobackup;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.slf4j.LoggerFactory;
 
@@ -54,6 +55,9 @@ public class MainActivity extends Activity {
         switch (item.getItemId()){
             case R.id.trial_info:
                 LOG.debug("trail_info selected");
+
+                this.startService(new Intent(this, UploadService.class));
+                Toast.makeText(getApplicationContext(), "Starting service", Toast.LENGTH_SHORT);
                 break;
             case R.id.preferences:
                 LOG.debug("Preferences selected");

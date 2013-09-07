@@ -39,6 +39,8 @@ clean {
 
 
 dependencies {
+//    compile files('libs/android-support-v4.jar')
+//    compile project(":libraries:Android-ViewPagerIndicator:library")
     compile 'com.googlecode.androidannotations:androidannotations:2.7.1'
     compile 'com.googlecode.androidannotations:androidannotations-api:2.7.1'
     compile 'ch.acra:acra:4.5.0'

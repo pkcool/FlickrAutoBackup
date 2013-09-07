@@ -22,6 +22,8 @@ import com.googlecode.flickrjandroid.uploader.UploadMetaData;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -352,7 +354,7 @@ public class FlickrApi {
 					} else {
 						LOG.debug("uploading : " + uri);
 						File file = new File(uri);
-						// InputStream inputStream = new FileInputStream(uri);
+						InputStream inputStream = new FileInputStream(uri);
 						UploadMetaData metaData = new UploadMetaData();
 						PRIVACY privacy = Utils.getDefaultPrivacy();
 						metaData.setFriendFlag(privacy == PRIVACY.FRIENDS || privacy == PRIVACY.FRIENDS_FAMILY);
@@ -360,7 +362,7 @@ public class FlickrApi {
 						metaData.setPublicFlag(privacy == PRIVACY.PUBLIC);
 						metaData.setTags(Arrays.asList(md5tag, sha1tag));
 						long start = System.currentTimeMillis();
-//						photoId = FlickrApi.get().getUploader().upload(image.name, file, metaData, image);
+						photoId = FlickrApi.get().getUploader().upload(image.name, inputStream, metaData);
 						LOG.debug("photo uploaded in " + (System.currentTimeMillis() - start) + "ms : " + photoId);
 						uploadedPhotos.put(sha1tag, photoId);
 						photosPrivacy.put(photoId, privacy);

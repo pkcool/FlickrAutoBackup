@@ -1,1 +1,2 @@
 include ':FlickrAutoBackup'
+//include ":libraries:Android-ViewPagerIndicator:library", ':FlickrAutoBackup'

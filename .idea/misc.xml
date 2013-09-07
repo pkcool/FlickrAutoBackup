@@ -3,6 +3,27 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="android" url="file://$PROJECT_DIR$/libraries/Android-ViewPagerIndicator/library" />
+    <file type="android" url="file://$PROJECT_DIR$/libraries/Android-ViewPagerIndicator/sample" />
+    <file type="android" url="file://$PROJECT_DIR$/../JakeWharton-Android-ViewPagerIndicator-8cd549f/library" />
+    <file type="android" url="file://$PROJECT_DIR$/../JakeWharton-Android-ViewPagerIndicator-8cd549f/sample" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/../JakeWharton-Android-ViewPagerIndicator-8cd549f/pom.xml" />
+        <option value="$PROJECT_DIR$/libraries/Android-ViewPagerIndicator/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/../JakeWharton-Android-ViewPagerIndicator-8cd549f/library/pom.xml" />
+        <option value="$PROJECT_DIR$/../JakeWharton-Android-ViewPagerIndicator-8cd549f/pom.xml" />
+        <option value="$PROJECT_DIR$/../JakeWharton-Android-ViewPagerIndicator-8cd549f/sample/pom.xml" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>

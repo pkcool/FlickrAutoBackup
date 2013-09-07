@@ -33,15 +33,15 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.smaxll.intent.CANCEL_UPLOAD" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.smaxll.intent.SHARE_PHOTO" />
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
+            <!--</intent-filter>-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.smaxll.intent.CANCEL_UPLOAD" />-->
+            <!--</intent-filter>-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.smaxll.intent.SHARE_PHOTO" />-->
+            <!--</intent-filter>-->
         </receiver>
 
         <activity
