@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.ListPreference;
@@ -42,6 +41,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 	public static final String AUTOUPLOAD = "autoupload";
 	public static final String AUTOUPLOAD_VIDEOS = "autouploadvideos";
 	public static final String CHARGING_ONLY = "charging_only";
+    public static final String NOTIFICATION_EMAIL = "notifyemail";
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -105,15 +105,6 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 		privacyPreference.setEntries(entries);
 		privacyPreference.setEntryValues(values);
 
-		findPreference("rate").setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				Preferences.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.rafali.flickruploader")));
-				Mixpanel.track("Rate");
-				Utils.setBooleanProperty(STR.hasRated, true);
-				return false;
-			}
-		});
 
 		findPreference("notifications").setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
@@ -123,24 +114,6 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 			}
 		});
 
-		findPreference("pictarine").setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				Mixpanel.track("Pictarine");
-				Preferences.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.pictarine.android")));
-				return false;
-			}
-		});
-
-		findPreference("feedback").setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				Mixpanel.track("Feedback");
-				Utils.showEmailActivity(Preferences.this, "Feedback on Flickr Instant Upload", "Here are some feedback to improve this app:", true);
-				return false;
-			}
-
-		});
 
 		findPreference(AUTOUPLOAD_PHOTOSET).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
@@ -248,6 +221,11 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 			login.setSummary(Utils.getStringProperty(STR.userName) + " is currently logged in");
 		}
 
+
+        String notificationEmail = sp.getString(NOTIFICATION_EMAIL, "");
+        if (!notificationEmail.isEmpty()){
+            findPreference(NOTIFICATION_EMAIL).setSummary("Notifications will be sent to " + notificationEmail);
+        }
 
 	}
 

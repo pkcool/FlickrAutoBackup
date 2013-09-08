@@ -44,26 +44,32 @@
             <!--</intent-filter>-->
         </receiver>
 
+        <!--<activity-->
+        <!--android:name="com.smaxll.apps.android.flickrautobackup.MainActivity"-->
+        <!--android:label="@string/app_name" >-->
+        <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+        <!--</intent-filter>-->
+    <!--</activity>-->
+
         <activity
-            android:name="com.smaxll.apps.android.flickrautobackup.MainActivity"
-            android:label="@string/app_name" >
+            android:name="com.smaxll.apps.android.flickrautobackup.Preferences"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
-            android:name=".Preferences"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:icon="@drawable/empty_shape"
-            android:label="Preferences" />
-        <activity
             android:name=".PreferencesNotification"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:icon="@drawable/empty_shape"
             android:label="Notifications" />
+
         <activity
             android:name=".WebAuth"
             android:configChanges="orientation|screenSize|keyboardHidden"

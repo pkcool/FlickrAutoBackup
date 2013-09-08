@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +44,7 @@ public class MainActivity extends Activity {
     private void renderMenu() {
         if (menu != null) {
             // set the trial info invisible if the customer is a paid customer
-            menu.findItem(R.id.trial_info).setVisible(true);
+//            menu.findItem(R.id.trial_info).setVisible(true);
         }
     }
 
@@ -53,12 +52,6 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
-            case R.id.trial_info:
-                LOG.debug("trail_info selected");
-
-                this.startService(new Intent(this, UploadService.class));
-                Toast.makeText(getApplicationContext(), "Starting service", Toast.LENGTH_SHORT);
-                break;
             case R.id.preferences:
                 LOG.debug("Preferences selected");
                 startActivity(new Intent(this, Preferences.class));

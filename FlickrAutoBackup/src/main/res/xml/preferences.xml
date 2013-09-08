@@ -42,17 +42,10 @@
     <PreferenceScreen
         android:key="notifications"
         android:title="Notifications" />
-    <PreferenceScreen
-        android:key="rate"
-        android:summary="If you like this app, please rate it ★★★★★ on Google Play"
-        android:title="Rate the app" />
-    <PreferenceScreen
-        android:key="feedback"
-        android:summary="Something is not right? Need some help? Ideas for improvements?"
-        android:title="Feedback / Help" />
-    <PreferenceScreen
-        android:key="pictarine"
-        android:summary="Browse your photos and friends photos from Flickr, Facebook, Instagram, Twitter, Tumblr and more"
-        android:title="Pictarine, the best photo app" />
 
+    <EditTextPreference
+        android:key="notifyemail"
+        android:title="Email notification"
+        android:summary="notifications for uploaded photos"
+        android:inputType="text" />
 </PreferenceScreen>
