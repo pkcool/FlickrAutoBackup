@@ -114,6 +114,29 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 			}
 		});
 
+        findPreference(AUTOUPLOAD).setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                if (sp.getBoolean(AUTOUPLOAD, false) && !Utils.isServiceRunning(Preferences.this, "com.smaxll.apps.android.flickrautobackup.Preferences")){
+                    startService(new Intent(Preferences.this, UploadService.class));
+                    UploadService.wake();
+                }
+                return false;
+            }
+        });
+
+        findPreference(AUTOUPLOAD_VIDEOS).setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                if (sp.getBoolean(AUTOUPLOAD_VIDEOS, false) && !Utils.isServiceRunning(Preferences.this, "com.smaxll.apps.android.flickrautobackup.Preferences")){
+                    startService(new Intent(Preferences.this, UploadService.class));
+                    UploadService.wake();
+                }
+                return false;
+            }
+        });
+
+
 
 		findPreference(AUTOUPLOAD_PHOTOSET).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override

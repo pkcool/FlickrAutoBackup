@@ -3,6 +3,7 @@ package com.smaxll.apps.android.flickrautobackup;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,32 +14,20 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.BatteryManager;
-import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
 import android.provider.MediaStore.Video;
 import android.provider.Settings.Secure;
-import android.telephony.TelephonyManager;
-import android.util.TypedValue;
-import android.view.WindowManager;
-
 
 import com.google.common.base.Joiner;
 import com.googlecode.androidannotations.api.BackgroundExecutor;
-import com.googlecode.androidannotations.api.rest.MediaType;
 
-import org.apache.http.HttpRequest;
 import org.slf4j.LoggerFactory;
-//import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -54,7 +43,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -65,11 +53,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.prefs.Preferences;
 
 import uk.co.senab.bitmapcache.BitmapLruCache;
+
+//import org.slf4j.LoggerFactory;
 
 
 public final class Utils {
@@ -827,6 +814,22 @@ public final class Utils {
         } catch (IOException e) {
             return false;
         }
+    }
+
+    /***
+     * Check if a service is running in the background
+     * @param context the Activity context
+     * @param serviceName the name of the service to be checked
+     * @return true if the service is running in the background, false otherwise
+     */
+    public static boolean isServiceRunning(Context context, String serviceName) {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceName.equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
