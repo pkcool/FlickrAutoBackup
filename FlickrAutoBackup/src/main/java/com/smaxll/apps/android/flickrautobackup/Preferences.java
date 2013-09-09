@@ -106,13 +106,13 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 		privacyPreference.setEntryValues(values);
 
 
-		findPreference("notifications").setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				startActivity(new Intent(Preferences.this, PreferencesNotification.class));
-				return false;
-			}
-		});
+//		findPreference("notifications").setOnPreferenceClickListener(new OnPreferenceClickListener() {
+//			@Override
+//			public boolean onPreferenceClick(Preference preference) {
+//				startActivity(new Intent(Preferences.this, PreferencesNotification.class));
+//				return false;
+//			}
+//		});
 
         findPreference(AUTOUPLOAD).setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override

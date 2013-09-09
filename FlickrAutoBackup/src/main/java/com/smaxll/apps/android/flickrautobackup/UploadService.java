@@ -1,7 +1,11 @@
 package com.smaxll.apps.android.flickrautobackup;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.IBinder;
 import android.provider.MediaStore;
 
@@ -135,19 +139,19 @@ public class UploadService extends Service {
             thread = new Thread(new UploadRunnable());
             thread.start();
         }
-//        BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context context, Intent intent) {
-//                int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-//                boolean charging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
-//                Utils.setCharging(charging);
-//                LOG.debug("charging : " + charging + ", status : " + status);
-//                if (charging)
-//                    wake();
-//            }
-//        };
-//        IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-//        registerReceiver(batteryReceiver, filter);
+        BroadcastReceiver batteryReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+                boolean charging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+                Utils.setCharging(charging);
+                LOG.debug("charging : " + charging + ", status : " + status);
+                if (charging)
+                    wake();
+            }
+        };
+        IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        registerReceiver(batteryReceiver, filter);
     }
 
     @Override

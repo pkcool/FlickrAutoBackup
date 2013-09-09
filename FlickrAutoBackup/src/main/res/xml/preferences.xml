@@ -32,20 +32,24 @@
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="charging_only"
-        android:title="Only when charging" />
+        android:title="While charging only"
+        android:summary="Back up photos &amp; videos only when a charger is connected"
+        />
 
     <ListPreference
         android:dialogTitle="Upload privacy"
         android:key="upload_privacy"
         android:title="Upload privacy" />
 
-    <PreferenceScreen
-        android:key="notifications"
-        android:title="Notifications" />
+    <!--<PreferenceScreen-->
+        <!--android:key="notifications"-->
+        <!--android:title="Notifications" />-->
 
     <EditTextPreference
         android:key="notifyemail"
         android:title="Email notification"
         android:summary="notifications for uploaded photos"
         android:inputType="text" />
+
+
 </PreferenceScreen>
