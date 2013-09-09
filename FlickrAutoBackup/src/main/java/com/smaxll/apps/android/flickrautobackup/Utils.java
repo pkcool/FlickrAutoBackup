@@ -234,11 +234,21 @@ public final class Utils {
     }
 
 
-
+    /**
+     * Load all images with the filter applied
+     * @param filter
+     * @return the filtered images
+     */
     public static List<Media> loadImages(String filter) {
         return loadImages(filter, 0);
     }
 
+    /**
+     * Load the specified number of images and videos with filter applied
+     * @param filter
+     * @param limit the number of images and videos to be returned. i.e. if limit = 10, max. 10 photos and max. 10 videos will be returned
+     * @return
+     */
     public static List<Media> loadImages(String filter, int limit) {
         List<Media> photos = Utils.loadImages(filter, MediaType.photo, limit);
         List<Media> videos = Utils.loadImages(filter, MediaType.video, limit);
@@ -248,10 +258,23 @@ public final class Utils {
         return images;
     }
 
+    /**
+     * Load all images or videos with the filter applied
+     * @param filter
+     * @param mediaType indicates photo or video
+     * @return
+     */
     public static List<Media> loadImages(String filter, MediaType mediaType) {
         return loadImages(filter, mediaType, 0);
     }
 
+    /**
+     * load the limit number of filtered images or videos
+     * @param filter the filter to be applied
+     * @param mediaType indicates photo or video
+     * @param limit the number of images or videos to be returned
+     * @return the filtered images or videos
+     */
     public static List<Media> loadImages(String filter, MediaType mediaType, int limit) {
         Cursor cursor = null;
         List<Media> images = new ArrayList<Media>();
