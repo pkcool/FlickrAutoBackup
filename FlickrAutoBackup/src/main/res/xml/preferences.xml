@@ -52,4 +52,15 @@
         android:inputType="text" />
 
 
+    <PreferenceCategory
+        android:title="About"
+        >
+
+        <PreferenceScreen
+            android:key="about_autobackup"
+            android:title="About Flickr Auto Backup"
+            android:summary="Learn more about storing photos with Flickr"
+            />
+
+    </PreferenceCategory>
 </PreferenceScreen>
