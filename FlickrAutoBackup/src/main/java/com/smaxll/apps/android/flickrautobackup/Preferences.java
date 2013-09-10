@@ -118,7 +118,7 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
         findPreference(AUTOUPLOAD).setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                if (sp.getBoolean(AUTOUPLOAD, false) && !Utils.isServiceRunning(Preferences.this, "com.smaxll.apps.android.flickrautobackup.Preferences")){
+                if (sp.getBoolean(AUTOUPLOAD, false) && !Utils.isServiceRunning(Preferences.this, "com.smaxll.apps.android.flickrautobackup.Preferences")) {
                     startService(new Intent(Preferences.this, UploadService.class));
                     UploadService.wake();
                 }
@@ -255,10 +255,10 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
 		}
 
 
-        String notificationEmail = sp.getString(NOTIFICATION_EMAIL, "");
-        if (!notificationEmail.isEmpty()){
-            findPreference(NOTIFICATION_EMAIL).setSummary("Notifications will be sent to " + notificationEmail);
-        }
+//        String notificationEmail = sp.getString(NOTIFICATION_EMAIL, "");
+//        if (!notificationEmail.isEmpty()){
+//            findPreference(NOTIFICATION_EMAIL).setSummary("Notifications will be sent to " + notificationEmail);
+//        }
 
 	}
 

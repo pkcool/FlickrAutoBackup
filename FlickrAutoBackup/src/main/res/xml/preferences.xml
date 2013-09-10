@@ -1,66 +1,64 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceScreen android:key="login" />
+    <PreferenceCategory android:title="ACCOUNT">
+        <PreferenceScreen android:key="login" />
+    </PreferenceCategory>
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="autoupload"
-        android:summaryOff="Photos are manually uploaded"
-        android:summaryOn="Photos are automatically uploaded"
-        android:title="Photo Instant Upload" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="autouploadvideos"
-        android:summaryOff="Videos are manually uploaded"
-        android:summaryOn="Videos are automatically uploaded"
-        android:title="Video Instant Upload" />
+    <PreferenceCategory android:title="BACKUP SETTINGS"
+        android:key="backup_settings">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="autoupload"
+            android:summaryOn="Photos are automatically uploaded"
+            android:title="Backup photos" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="autouploadvideos"
+            android:summaryOn="Videos are automatically uploaded"
+            android:title="Backup videos" />
 
-    <ListPreference
-        android:dialogTitle="Instant Upload Photoset"
-        android:entries="@array/autoupload_photoset_entries"
-        android:entryValues="@array/autoupload_photoset_values"
-        android:key="autoupload_photoset"
-        android:title="Instant Upload Photoset" />
-    <ListPreference
-        android:defaultValue="wifior3G"
-        android:dialogTitle="When to upload"
-        android:entries="@array/network_entries"
-        android:entryValues="@array/network_values"
-        android:key="upload_network"
-        android:title="When to upload" />
+        <ListPreference
+            android:dialogTitle="Instant Upload Photoset"
+            android:entries="@array/autoupload_photoset_entries"
+            android:entryValues="@array/autoupload_photoset_values"
+            android:key="autoupload_photoset"
+            android:title="Instant Upload Photoset" />
+        <ListPreference
+            android:defaultValue="wifior3G"
+            android:dialogTitle="When to upload"
+            android:entries="@array/network_entries"
+            android:entryValues="@array/network_values"
+            android:key="upload_network"
+            android:title="When to upload" />
 
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="charging_only"
-        android:title="While charging only"
-        android:summary="Back up photos &amp; videos only when a charger is connected"
-        />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="charging_only"
+            android:title="While charging only"
+            android:summary="Back up photos &amp; videos only when a charger is connected" />
 
-    <ListPreference
-        android:dialogTitle="Upload privacy"
-        android:key="upload_privacy"
-        android:title="Upload privacy" />
+        <ListPreference
+            android:dialogTitle="Upload privacy"
+            android:key="upload_privacy"
+            android:title="Upload privacy"
+            android:enabled="false"
+            />
 
-    <!--<PreferenceScreen-->
+        <!--<PreferenceScreen-->
         <!--android:key="notifications"-->
         <!--android:title="Notifications" />-->
 
-    <EditTextPreference
-        android:key="notifyemail"
-        android:title="Email notification"
-        android:summary="notifications for uploaded photos"
-        android:inputType="text" />
+        <!--<EditTextPreference-->
+            <!--android:key="notifyemail"-->
+            <!--android:title="Email notification"-->
+            <!--android:summary="notifications for uploaded photos"-->
+            <!--android:inputType="text" />-->
+    </PreferenceCategory>
 
-
-    <PreferenceCategory
-        android:title="About"
-        >
-
+    <PreferenceCategory android:title="ABOUT">
         <PreferenceScreen
             android:key="about_autobackup"
             android:title="About Flickr Auto Backup"
-            android:summary="Learn more about storing photos with Flickr"
-            />
-
+            android:summary="Learn more about storing photos with Flickr" />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -6,8 +6,8 @@
         <item>wifionly</item>
     </array>
     <array name="network_entries">
-        <item>Wi-Fi and 3G</item>
-        <item>Wi-Fi only</item>
+        <item>Over Wi-Fi or mobile network</item>
+        <item>Over Wi-Fi only</item>
     </array>
 
     <array name="autoupload_photoset_values">
